@@ -1,0 +1,21 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+body{
+    background-color: black;
+}
+.login
+{
+    background-color: black;
+    height:100vh;
+}
+.text-color
+{
+    color:rgb(0,172,186);
+}
+.signup
+{
+    color:white;
+    font-weight: bolder;
+}
