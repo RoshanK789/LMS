@@ -24,7 +24,7 @@ const Signin = () => {
             try {
                 setLoading(true);
                 setErrorMessage(null);
-                const response = await fetch('http://localhost:5000/api/auth/login-user',{
+                const response = await fetch('http://localhost:5000/api/auth/Admin',{
                     method:'POST',
                     headers:{
                         'Content-Type':'application/json'
@@ -40,7 +40,7 @@ const Signin = () => {
                 }
                
                 if(response.ok){
-                    navigate('/Home');
+                    navigate('/Adminview');
                 }
             } catch (error) {
               setErrorMessage(error.message)
@@ -56,7 +56,7 @@ const Signin = () => {
                 <img src="/src/Images/Untitled(1).png" className="my-lg-5 mx-lg-5 m-auto"/>
             </div>
             <div className="col-lg-6  my-lg-auto m-auto">
-                <h1 className='text-color fw-bolder m-2 fs-5'>Login page</h1>
+                <h1 className='text-color fw-bolder m-2 fs-5'>Admin page</h1>
                 <form className="row g-2" onSubmit={handleSubmit}>
                     <div className="col-6 ">
                     <input type="text" placeholder="Email address"  className="form-control" id="mail" onChange={handleChange} />
@@ -87,10 +87,12 @@ const Signin = () => {
             <span className="font-medium me-2">🥴OOPS!</span>{errorMessage}
           </Alert>
           )}
-                <h3 className="text-color mx-lg-auto">Don't have account <Link className="fw-bold" to="/Signup"> "Register here"</Link></h3>
-                <p className="text-colors mx-lg-auto"><Link to="/Admin">Click here for <b>Admin login</b></Link></p>
+                <h3 className="text-color mx-lg-auto">Don't have account <Link className="fw-bold" to="/Signup">"Logins here"</Link></h3>
+                <p className="text-colors mx-lg-auto"><Link to="/">Click here for <b>user login</b></Link></p>
+
+                <p className="fw-bold mx-lg-auto">Note*: for Admin login use this id : admin@gmail.com password : 123456</p>
             </div>
-           
+          
         </div>
       </div>
         </div>

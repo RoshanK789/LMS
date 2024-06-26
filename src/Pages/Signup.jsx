@@ -55,13 +55,13 @@ const Signup = () => {
                 <h1 className='text-color fw-bolder m-2 fs-5'>New User Register</h1>
                 <form className="row g-2" onSubmit={handleSubmit}>
                     <div className="col-6 ">
-                    <TextInput type="text" placeholder="Email address"  className="form-control" id="mail" onChange={handleChange} />
+                    <input type="text" placeholder="Email address"  className="form-control" id="mail" onChange={handleChange} />
                     </div>
                     <div className="col-6 ">
-                    <TextInput type="Password" placeholder="Password"  className="form-control" id="password" onChange={handleChange} />
+                    <input type="Password" placeholder="Password"  className="form-control" id="password" onChange={handleChange} />
                     </div>
                     <div className="">
-                    <Button disabled={loading} className="text-white bg-gradient-to-r from-teal-400 via-teal-500 to-teal-600 hover:bg-gradient-to-br focus:ring-4 focus:outline-none focus:ring-teal-300 dark:focus:ring-teal-800 shadow-lg shadow-teal-500/50 dark:shadow-lg dark:shadow-teal-800/80 font-medium rounded-lg text-sm px-5 py-2.5 text-center me-2 mb-2" type='submit'>
+                    <Button disabled={loading} className="text-white btn-colors text-center me-2 mb-2" type='submit'>
                     {loading ? (
                 <>
                 <Spinner color="purple" aria-label="Purple spinner example" size='sm'/>
@@ -83,7 +83,7 @@ const Signup = () => {
             <span className="font-medium me-2">🥴OOPS!</span>{errorMessage}
           </Alert>
           )}
-                <h3 className="text-color mx-lg-auto">Already have account <Link className="signup" to="/">"Login here"</Link></h3>
+                <h3 className="text-color mx-lg-auto">Already have account <Link className='fw-bold' to="/">"Login here"</Link></h3>
             </div>
            
         </div>

@@ -2,8 +2,9 @@ import React, { useState } from 'react';
 import { Alert,Button,Label,Spinner,TextInput} from 'flowbite-react';
 import { Link, useNavigate } from "react-router-dom";
 import { HiInformationCircle } from "react-icons/hi";
+import Header from '../Components/Header';
 
-const Signin = () => {
+const Signup = () => {
     const [formData, setFormData] = useState({});
     const [loading,setLoading] = useState(false)
     const [errorMessage,setErrorMessage] = useState(null);
@@ -18,29 +19,22 @@ const Signin = () => {
         {
 
             e.preventDefault();
-            if(!formData.mail || !formData.password){
+            if(!formData.mail || !formData.phonenumber||!formData.Query||!formData.name){
                 return setErrorMessage("please fill out the fields");
             }
             try {
                 setLoading(true);
                 setErrorMessage(null);
-                const response = await fetch('http://localhost:5000/api/auth/login-user',{
+                const response = await fetch('http://localhost:5000/api/auth/contactform-user',{
                     method:'POST',
                     headers:{
                         'Content-Type':'application/json'
                     },
                     body:JSON.stringify(formData)
-                   
                 })
-                console.log(response)
-                const data = await response.json();
-                console.log(data);
-                if(data.success === false){
-                    return setErrorMessage(data.message)
-                }
-               
+                console.log(response.ok)
                 if(response.ok){
-                    navigate('/Home');
+                    navigate('/Success');
                 }
             } catch (error) {
               setErrorMessage(error.message)
@@ -49,30 +43,29 @@ const Signin = () => {
           };
         
     return (
+        
         <div>
-                  <div className="container">
-        <div className="row m-auto">
-            <div className="col-lg-6  my-lg-5 m-auto col-12" >
-                <img src="/src/Images/Untitled(1).png" className="my-lg-5 mx-lg-5 m-auto"/>
-            </div>
+            <Header />
+                  <div className="container  mt-5 width">
+
             <div className="col-lg-6  my-lg-auto m-auto">
-                <h1 className='text-color fw-bolder m-2 fs-5'>Login page</h1>
+                <h1 className='text-color fw-bolder m-2 fs-5'>Contact form</h1>
                 <form className="row g-2" onSubmit={handleSubmit}>
-                    <div className="col-6 ">
-                    <input type="text" placeholder="Email address"  className="form-control" id="mail" onChange={handleChange} />
-                    </div>
-                    <div className="col-6 ">
-                    <input type="Password" placeholder="Password"  className="form-control" id="password" onChange={handleChange} />
-                    </div>
+                  
+                    <input type="text" placeholder="Name"  className="form-control my-lg-3" id="name" onChange={handleChange} />
+                    <input type="text" placeholder="mail"  className="form-control my-lg-3" id="mail" onChange={handleChange} />
+                    <input type="text" placeholder="Phone Number"  className="form-control my-lg-3" id="phonenumber" onChange={handleChange} />
+                    <input type="Text" placeholder="Query"  className="form-control my-lg-3" id="Query" onChange={handleChange} />
+                
                     <div className="">
-                    <Button disabled={loading} className="text-white btn-colors text-sm px-5 py-2.5 text-center me-2 mb-2" type='submit'>
+                    <Button disabled={loading} className="text-white btn-colors text-center me-2 mb-2" type='submit'>
                     {loading ? (
                 <>
                 <Spinner color="purple" aria-label="Purple spinner example" size='sm'/>
                 <span className="pl-3">Loading...</span>
                 </>
              ) : ( 
-                'Sign in'
+                'Send a query'
              )
             }
                     </Button>
@@ -87,14 +80,13 @@ const Signin = () => {
             <span className="font-medium me-2">🥴OOPS!</span>{errorMessage}
           </Alert>
           )}
-                <h3 className="text-color mx-lg-auto">Don't have account <Link className="fw-bold" to="/Signup"> "Register here"</Link></h3>
-                <p className="text-colors mx-lg-auto"><Link to="/Admin">Click here for <b>Admin login</b></Link></p>
+               
             </div>
            
         </div>
       </div>
-        </div>
+       
     );
 };
 
-export default Signin;
+export default Signup;
