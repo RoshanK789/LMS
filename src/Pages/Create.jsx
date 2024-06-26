@@ -26,7 +26,7 @@ const Create = () => {
       .then((res) => console.log(res.data))
       .catch((error) => console.log(error));
 
-    navigate("/Adminview");
+    
   };
   return (
     <div>
@@ -42,16 +42,6 @@ const Create = () => {
               onChange={handleChange}
             />
           </div>
-          <div className="col-md-6">
-            <label className="form-label">Price</label>
-            <input
-              type="text"
-              className="form-control"
-              name="price"
-              value={createData.price}
-              onChange={handleChange}
-            />
-          </div>
           <div className="col-6">
             <label className="form-label">Image</label>
             <input
@@ -62,6 +52,17 @@ const Create = () => {
               onChange={handleChange}
             />
           </div>
+          <div className="col-md-6">
+            <label className="form-label">Price</label>
+            <input
+              type="text"
+              className="form-control"
+              name="price"
+              value={createData.price}
+              onChange={handleChange}
+            />
+          </div>
+          
         
 
           <div className="col-12">
