@@ -50,10 +50,10 @@ const Signin = () => {
         
     return (
         <div>
-                  <div className="container">
+                  <div className="container my-lg-5">
         <div className="row m-auto">
             <div className="col-lg-6  my-lg-5 m-auto col-12" >
-                <img src="/src/Images/Untitled(1).png" className="my-lg-5 mx-lg-5 m-auto"/>
+                <img src="./src/Images/Untitled(1).png" className="my-lg-5 mx-lg-5 m-auto"/>
             </div>
             <div className="col-lg-6  my-lg-auto m-auto">
                 <h1 className='text-color fw-bolder m-2 fs-5'>Login page</h1>
