@@ -3,6 +3,9 @@ import { Alert,Button,Label,Spinner,TextInput} from 'flowbite-react';
 import { Link, useNavigate } from "react-router-dom";
 import { HiInformationCircle } from "react-icons/hi";
 import { mycontext } from '../App';
+import * as Yup from 'yup';
+import { useFormik } from "formik";
+import axios from "axios";
 
 const Signin = () => {
     const [formData, setFormData] = useState({});
@@ -17,45 +20,75 @@ const Signin = () => {
         setFormData({ ...formData, [e.target.id]: e.target.value.trim() });
         //console.log(formData);
       };
-    
-    const handleSubmit=async(e)=>
-        {
-
-            e.preventDefault();
-            if(!formData.mail || !formData.password){
-                return setErrorMessage("please fill out the fields");
-            }
+      const [createData, setCreateData] = useState({ 
+        mail:'',
+        password:''
+       });
+      const validationSchema=Yup.object().shape({
+        mail:Yup.string().required('Enter the mail'),
+        password:Yup.string().required('Enter the password')
+    }) 
+    const Formik=useFormik({
+        initialValues:createData,
+        validationSchema,
+        onSubmit:async(values)=>
+          {
             try {
-                setLoading(true);
-                setErrorMessage(null);
-                const response = await fetch('https://lms-backend-iy9y.onrender.com/api/auth/login-user',{
-                    method:'POST',
-                    headers:{
-                        'Content-Type':'application/json'
-                    },
-                    body:JSON.stringify(formData)
-                   
-                })
-               // console.log(response)
-                const data = await response.json();
-                console.log(data);
-                if(data.success === false){
-                    return setErrorMessage(data.message)
-                }
-               
-                if(response.ok){
-                    localStorage.setItem("Token",data.token); //token from the response is stored in local storage
-                    //console.log("data",data.pass)
-                    console.log(setUser);
-                    setUser(data.pass); //user details from the response is set to user
-                    console.log(setUser);
-                    navigate('/Home');
-                }
+               const response= await axios
+                .post(`https://lms-backend-iy9y.onrender.com/api/auth/login-user`, values)
+            
+                if (response.status == 200) {
+                  
+                    localStorage.setItem("Token", response.data.token);
+                    setUser(response.data.pass); 
+                    navigate("/Home");
+                  }
             } catch (error) {
               setErrorMessage(error.message)
               setLoading(false)
             }
-          };
+          }
+    
+      })
+   
+    // const handleSubmit=async(e)=>
+    //     {
+
+    //         e.preventDefault();
+    //         if(!formData.mail || !formData.password){
+    //             return setErrorMessage("please fill out the fields");
+    //         }
+    //         try {
+    //             setLoading(true);
+    //             setErrorMessage(null);
+    //             const response = await fetch('https://lms-backend-iy9y.onrender.com/api/auth/login-user',{
+    //                 method:'POST',
+    //                 headers:{
+    //                     'Content-Type':'application/json'
+    //                 },
+    //                 body:JSON.stringify(formData)
+                   
+    //             })
+    //            // console.log(response)
+    //             const data = await response.json();
+    //             console.log(data);
+    //             if(data.success === false){
+    //                 return setErrorMessage(data.message)
+    //             }
+               
+    //             if(response.ok){
+    //                 localStorage.setItem("Token",data.token); //token from the response is stored in local storage
+    //                 //console.log("data",data.pass)
+    //                 console.log(setUser);
+    //                 setUser(data.pass); //user details from the response is set to user
+    //                 console.log(setUser);
+    //                 navigate('/Home');
+    //             }
+    //         } catch (error) {
+    //           setErrorMessage(error.message)
+    //           setLoading(false)
+    //         }
+    //       };
         
     return (
         <div>
@@ -66,12 +99,14 @@ const Signin = () => {
             </div>
             <div className="col-lg-6  my-lg-auto m-auto">
                 <h1 className='text-color fw-bolder m-2 fs-5'>Login page</h1>
-                <form className="row g-2" onSubmit={handleSubmit}>
+                <form className="row g-2" onSubmit={Formik.handleSubmit}>
                     <div className="col-6 ">
-                    <input type="text" placeholder="Email address"  className="form-control" id="mail" onChange={handleChange} />
+                    <input type="text" placeholder="Email address"  className="form-control" id="mail" values={Formik.values.mail} onChange={Formik.handleChange} />
+                    <p className="error">{Formik.errors.mail}</p>
                     </div>
                     <div className="col-6 ">
-                    <input type="Password" placeholder="Password"  className="form-control" id="password" onChange={handleChange} />
+                    <input type="Password" placeholder="Password"  className="form-control" id="password" values={Formik.values.password} onChange={Formik.handleChange} />
+                    <p className="error">{Formik.errors.password}</p>
                     </div>
                     <div className="">
                     <Button disabled={loading} className="text-white btn-colors text-sm px-5 py-2.5 text-center me-2 mb-2" type='submit'>

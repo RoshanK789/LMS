@@ -123,6 +123,11 @@ img{
   
     border-radius: 24px;
   }
+  .error
+  {
+    color:red;
+    font-weight: bold;
+  }
   .modal
   {
     display: block;
