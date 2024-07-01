@@ -29,7 +29,7 @@ const navigate = useNavigate();
   });
   const fetchData = async () => {
     await axios
-      .get("http://localhost:5000/api/user/get")
+      .get("https://lms-backend-iy9y.onrender.com/api/user/get")
       .then((res) => setCourse(res.data))
       .catch((error) => console.log(error));
   };

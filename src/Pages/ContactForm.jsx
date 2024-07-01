@@ -25,7 +25,7 @@ const Signup = () => {
             try {
                 setLoading(true);
                 setErrorMessage(null);
-                const response = await fetch('http://localhost:5000/api/auth/contactform-user',{
+                const response = await fetch('https://lms-backend-iy9y.onrender.com/api/auth/contactform-user',{
                     method:'POST',
                     headers:{
                         'Content-Type':'application/json'

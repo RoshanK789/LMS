@@ -22,7 +22,7 @@ const Create = () => {
   const handleSubmit = async (e) => {
     e.preventDefault();
     await axios
-      .post(`http://localhost:5000/api/user/create`, createData)
+      .post(`https://lms-backend-iy9y.onrender.com/api/user/create`, createData)
       .then((res) => console.log(res.data))
       .catch((error) => console.log(error));
 
