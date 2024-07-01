@@ -49,7 +49,7 @@ const Signup = () => {
                   <div className="container">
         <div className="row m-auto">
             <div className="col-lg-6  my-lg-5" >
-                <img src="/src/Images/Untitled(1).png" className="my-lg-5 mx-lg-5"/>
+                <img src="https://tse4.mm.bing.net/th?id=OIP.mpK0dtxPxPchXtGHdK86qgHaHa&pid=Api&P=0&h=180" className="my-lg-5 mx-lg-5"/>
             </div>
             <div className="col-lg-6  my-lg-auto m-auto">
                 <h1 className='text-color fw-bolder m-2 fs-5'>New User Register</h1>

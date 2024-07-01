@@ -1,8 +1,17 @@
 import { Navbar, NavbarCollapse } from 'flowbite-react';
-import React from 'react';
-import { Link, NavLink, useLocation } from 'react-router-dom';
+import React, { useContext }  from 'react';
+import { Link, NavLink, useLocation, useNavigate } from 'react-router-dom';
+import { mycontext } from '../App';
 
 const Header = () => {
+    const navigate = useNavigate();
+    const [user, setUser] = useContext(mycontext);
+    const handleSignout = () => {
+        localStorage.removeItem("Token"); //token is removed from local storage
+        console.log('Token'); 
+        setUser(""); //user data is set empty
+        navigate("/");
+      };
     const path=useLocation().pathname; 
     return (
         <div>
@@ -31,9 +40,9 @@ const Header = () => {
                
                 </Navbar.Collapse>
                
-               <Link to='/'>
-                <span className='fw-bold fs-3'>Log out</span>
-                </Link>
+               
+                <span onClick={handleSignout} className='fw-bold fs-3'>Log out</span>
+                
              
             </Navbar>
         </div>

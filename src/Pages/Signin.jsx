@@ -1,12 +1,16 @@
-import React, { useState } from 'react';
+import React, { useContext, useState } from 'react';
 import { Alert,Button,Label,Spinner,TextInput} from 'flowbite-react';
 import { Link, useNavigate } from "react-router-dom";
 import { HiInformationCircle } from "react-icons/hi";
+import { mycontext } from '../App';
 
 const Signin = () => {
     const [formData, setFormData] = useState({});
     const [loading,setLoading] = useState(false)
     const [errorMessage,setErrorMessage] = useState(null);
+
+    const [user, setUser] = useContext(mycontext);
+
     const navigate = useNavigate();
     const handleChange = (e) => {
        
@@ -32,7 +36,7 @@ const Signin = () => {
                     body:JSON.stringify(formData)
                    
                 })
-                console.log(response)
+               // console.log(response)
                 const data = await response.json();
                 console.log(data);
                 if(data.success === false){
@@ -40,6 +44,11 @@ const Signin = () => {
                 }
                
                 if(response.ok){
+                    localStorage.setItem("Token",data.token); //token from the response is stored in local storage
+                    //console.log("data",data.pass)
+                    console.log(setUser);
+                    setUser(data.pass); //user details from the response is set to user
+                    console.log(setUser);
                     navigate('/Home');
                 }
             } catch (error) {
@@ -53,7 +62,7 @@ const Signin = () => {
                   <div className="container my-lg-5">
         <div className="row m-auto">
             <div className="col-lg-6  my-lg-5 m-auto col-12" >
-                <img src="./src/Images/Untitled(1).png" className="my-lg-5 mx-lg-5 m-auto"/>
+                <img src="https://tse4.mm.bing.net/th?id=OIP.mpK0dtxPxPchXtGHdK86qgHaHa&pid=Api&P=0&h=180" className="my-lg-5 mx-lg-5 m-auto"/>
             </div>
             <div className="col-lg-6  my-lg-auto m-auto">
                 <h1 className='text-color fw-bolder m-2 fs-5'>Login page</h1>

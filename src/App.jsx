@@ -1,5 +1,5 @@
 import { Button } from 'flowbite-react';
-import React, { useState } from 'react';
+import React, { createContext,useState } from 'react';
 import { BrowserRouter, Route,Routes } from 'react-router-dom';
 import Signin from './Pages/Signin';
 import Home from './Pages/Home';
@@ -13,14 +13,21 @@ import Admin from './Pages/Admin';
 import Adminpage from './Pages/Adminpage';
 import Create from './Pages/Create';
 import CourseEdit from './Pages/CourseEdit';
-const App = () => {
+import FooterComp from './Components/FooterComp ';
 
+
+
+export const mycontext = createContext("");
+const App = () => {
+  const [token, setToken] = useState("");
+  const [user, setUser] = useState("");
 
   return (
 
 
 
    <BrowserRouter>
+   <mycontext.Provider value={[token, setToken, user, setUser]}>
   <Routes>
     <Route path='/' element={<Signin />} />
     <Route path='/Home' element={<Home />} />
@@ -34,8 +41,10 @@ const App = () => {
     <Route path='/Adminview' element={<Adminpage />} />
     <Route path='/Create' element={<Create />} />
     <Route path="/CourseEdit/:id" element={<CourseEdit />} />
-    
   </Routes>
+<FooterComp /> 
+  </mycontext.Provider>
+  
    </BrowserRouter>
   );
 };
