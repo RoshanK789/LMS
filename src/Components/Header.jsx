@@ -5,10 +5,11 @@ import { mycontext } from '../App';
 
 const Header = () => {
     const navigate = useNavigate();
+    const token = localStorage.getItem("Token");
     const [user, setUser] = useContext(mycontext);
     const handleSignout = () => {
-        localStorage.removeItem("Token"); //token is removed from local storage
-        console.log('Token'); 
+        localStorage.removeItem(token); //token is removed from local storage
+        console.log(token); 
         setUser(""); //user data is set empty
         navigate("/");
       };
